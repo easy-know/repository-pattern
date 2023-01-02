@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: repository-pattern
+  profiles:
+    group:
+      default: mongo, jpa
+
+career:
+  infra: mongo
