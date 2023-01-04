@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.1"
-    id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
-    kotlin("kapt") version "1.7.20"
-    kotlin("plugin.jpa") version "1.7.20"
+    kotlin("plugin.spring") version "1.7.22" apply false
+    kotlin("kapt") version "1.7.20" apply false
+    kotlin("plugin.jpa") version "1.7.20" apply false
+    id("org.springframework.boot") version "3.0.1" apply false
+    id("io.spring.dependency-management") version "1.1.0"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -35,7 +35,6 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("io.github.microutils:kotlin-logging-jvm:3.0.0")
 
-        developmentOnly("org.springframework.boot:spring-boot-devtools")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
@@ -55,6 +54,15 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+
+    tasks.getByName("bootJar") {
+        enabled = false
+    }
+
+
+    tasks.getByName("jar") {
+        enabled = true
     }
 }
 

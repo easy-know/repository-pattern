@@ -9,6 +9,15 @@ class CareerJpaRepositoryAdapter(
     private val careerJpaRepository: CareerJpaRepository
 ) : CareerRepository {
     override fun submit(careerVM: CareerViewModel) {
+        val careerEntity = CareerJpaEntity(
+            contents = careerVM.contents
+        )
+        careerJpaRepository.save(
+            careerEntity
+        )
+    }
+
+    override fun findMyCareer(uuid: String) {
         TODO("Not yet implemented")
     }
 }
